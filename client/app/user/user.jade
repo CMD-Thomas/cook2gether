@@ -1,0 +1,25 @@
+template(name="user")
+	h3 #{user.username}'s profile
+	p #{user._id}'s
+	+ingredients
+	
+template(name="ingredients")
+	if params
+		+ingredients_form
+	p I have the following ingredients:
+	ul 
+		each ing
+			if isCreatedby
+				li #{name} #[a(href="#" class="deleteIng") X]
+			else 
+				li #{name}
+	+cook
+
+template(name="ingredients_form")
+	form  
+		input(type="text" placeholder="Ingrediënt" id="ingredientInput")
+		button(type="submit") Voeg toe
+
+
+template(name="cook")
+	a(href="/chat" id="#userId").btn.btn-primary.cook2gether Cook2gether

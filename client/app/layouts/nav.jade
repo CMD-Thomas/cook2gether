@@ -1,0 +1,21 @@
+head
+	link(href='https://fonts.googleapis.com/css?family=Raleway:300|Bitter:400,700' rel='stylesheet' type='text/css')
+	meta(name="viewport" content="width=device-width, initial-scale=1")
+	link(href="https://file.myfontastic.com/p4FGDQd9R9qVMMntYGQtnP/icons.css" rel="stylesheet")
+	title Cook2gether
+body
+
+template(name="nav")
+	header 
+		<i class="icon-menu menu-toggle header__menu"></i>
+		h3.header__title Cook2gether
+	nav
+		ul 
+			li.nav__items #[a(href="#") Home]
+			li.nav__items #[a(href="#") Home]
+			li.nav__items #[a(href="#") Home]
+	+content
+
+template(name="content")
+	.container 
+		+yield

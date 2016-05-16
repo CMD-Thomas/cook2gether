@@ -1,0 +1,13 @@
+template(name="home")
+	{{>loginButtons}}
+	+users
+
+template(name="users")
+	p Mede-koks
+	each user 
+		div
+			a(href='user/#{_id}') #{username}
+
+
+
+
