@@ -18,11 +18,7 @@ Meteor.startup(() => {
 	});
 	//Messages should be visible when your usedId is in a roomId
 	Meteor.publish("messages", function(roomId){
-	  return Messages.find({
-	  	$or: [
-	  		{roomId : roomId},
-	  	],
-	  });
+	  return Messages.find({roomId : roomId});
 	});
 });
 

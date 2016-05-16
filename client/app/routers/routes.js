@@ -28,8 +28,8 @@ Router.route('user/:_id', function(){
 });
 
 Router.route('/chat/:_id', function(){
-    var messages = Messages.find();
-	var user = Meteor.users.findOne({_id: this.params._id});
+    var messages 	= Messages.find();
+	var user 		= Meteor.users.findOne({_id: this.params._id});
 
 	this.render('chat', {
 		data: {
@@ -37,9 +37,5 @@ Router.route('/chat/:_id', function(){
 			user: user
 		}
 	});
-// this.render('chat');
 });
 
-//bertje:  5WnaYLgWY5EcpazNq
-//Bertje2: SWdShXmDSmWFQCSST
-//Zelf:    5WnaYLgWY5EcpazNq
