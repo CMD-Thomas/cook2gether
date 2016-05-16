@@ -2,11 +2,11 @@ import { Meteor } from 'meteor/meteor';
 
 Ingredients = new Mongo.Collection('ingredients');
 ChatRooms   = new Meteor.Collection('chatrooms');
-Markers     = new Meteor.Collection('markers');
 Messages    = new Meteor.Collection('messages');
 
 Meteor.methods({
-  'ing.insert'(name){
+  'ing.insert': function(name){
+    check(name, String);
     if (! Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
@@ -15,15 +15,25 @@ Meteor.methods({
       createdBy: Meteor.userId(),
     }) 
   },
-  'ing.remove'(ingId){
+  'ing.remove': function(ingId){
+    if (! Meteor.userId()) {
+      throw new Meteor.Error('not-authorized');
+    }
     Ingredients.remove(ingId);
   },
-  'cRoom.insert'(chatIds){
+  'cRoom.insert': function(chatIds){
+    check(chatIds, [String])
+    if (! Meteor.userId()) {
+      throw new Meteor.Error('not-authorized');
+    }
     ChatRooms.insert({
       chatIds: chatIds
     })
   },
-  'msg.insert'(roomId, messages){
+  'msg.insert': function(roomId, messages){
+    if (! Meteor.userId()) {
+      throw new Meteor.Error('not-authorized');
+    }
     Messages.insert({
       roomId : roomId,
       messages: messages,

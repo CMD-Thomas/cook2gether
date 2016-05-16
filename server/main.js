@@ -10,14 +10,11 @@ Meteor.startup(() => {
 	//Chatrooms should be only visible when when currentUser is one of the chatIds
 	//The client has access to all chatrooms where he/she is part off
 	Meteor.publish("chatrooms",function(){
-		return ChatRooms.find({
-			$or: [
-	    		{chatIds: this.userId},
-	    	],
-		});
+		return ChatRooms.find({chatIds: this.userId});
 	});
 	//Messages should be visible when your usedId is in a roomId
 	Meteor.publish("messages", function(roomId){
-	  return Messages.find({roomId : roomId});
+		check(roomId, Match.Maybe(String));
+		return Messages.find({roomId : roomId});
 	});
 });
