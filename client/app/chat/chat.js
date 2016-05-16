@@ -1,8 +1,15 @@
 Template.chat.onCreated(function bodyOnCreated() {
   Meteor.subscribe('messages', {roomId: Session.get('roomid')});
-  Meteor.subscribe('chatrooms')
+  console.log("oncreated in chat.js  " + Session.get('roomid'));
+  Meteor.subscribe('chatrooms');
 });
 
+Template.chat.helpers({
+  //I am returning all usernames here, which is not a problem since they are public anyway
+  'name': function(){
+    return Meteor.users.find().username;
+  }
+});
 
 Template.input.events = {
   'keydown input#message' : function (event) {

@@ -8,9 +8,7 @@ Meteor.startup(() => {
 		return Ingredients.find();
 	});
 	//Chatrooms should be only visible when when currentUser is one of the chatIds
-	// Meteor.publish("chatrooms",function(){
-	// 	return ChatRooms.find();
-	// });
+	//The client has access to all chatrooms where he/she is part off
 	Meteor.publish("chatrooms",function(){
 		return ChatRooms.find({
 			$or: [
@@ -26,31 +24,6 @@ Meteor.startup(() => {
 	  	],
 	  });
 	});
-
-	// Meteor.publish("roomAndMessages", function () {
-	//   return [
-	//     ChatRooms.find({
-
-	//     }),
-	//     Messages.find({
-	//     	$or: [
-	//     		{roomId: roomId},
-	//     	],
-	//     })
-	//   ];
-	// });
-
-
-//14 ChatRooms met $or
-	// Meteor.publish("roomAndMessages", function (roomId) {
-	//   return [
-	//     ChatRooms.find({$or: [{chatIds: this.userId}],
-	//     }),
-	//     //Find messages who are coupled to the room
-	//     Messages.find(),
-	//   ];
-	// });
-
 });
 
 

@@ -27,8 +27,7 @@ Meteor.methods({
     Messages.insert({
       roomId : roomId,
       messages: messages,
-      name: Meteor.user().username,
-      userId: Meteor.user()._id
+      name: Meteor.user().username
     })
   },
 });
