@@ -1,7 +1,7 @@
 Meteor.startup(() => {
 	//Meteor fixes this
 	Meteor.publish("users", function () {
-		return Meteor.users.find();
+		return Meteor.users.find({}, {fields:{username: 1, _id: 1}});
 	});
 	//Ingredients are allowed to be seen by all and thus public available even on client
 	Meteor.publish("ingredients", function(){
@@ -21,8 +21,3 @@ Meteor.startup(() => {
 	  return Messages.find({roomId : roomId});
 	});
 });
-
-
-//Autopublish - subscribe id 
-//Polling 
-//Deploy
