@@ -1,6 +1,5 @@
 template(name="user")
-	h3 #{user.username}'s profile
-	p #{user._id}'s
+	h4 #{user.username}'s profile
 	+ingredients
 	
 template(name="ingredients")
@@ -22,4 +21,7 @@ template(name="ingredients_form")
 
 
 template(name="cook")
-	a(href="/chat/#{user._id}" id="#userId").btn.btn-primary.cook2gether Cook2gether
+	if params
+		p Add ingredients with the form!
+	else 
+		a(href="/chat/#{user._id}" id="#userId").btn.btn-primary.cook2gether Cook2gether

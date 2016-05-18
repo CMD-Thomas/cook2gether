@@ -1,21 +1,20 @@
 Template.ingredients.onCreated(function bodyOnCreated() {
 	Meteor.subscribe('ingredients');
-    Meteor.subscribe('messages');
     Meteor.subscribe('chatrooms');
 });
-
  
 Template.ingredients.helpers({
 	isCreatedby() {
     	return this.createdBy === Meteor.userId();
-  	}
+  	},
+    currentUser: function() {
+        return Meteor.userId();
+    }
 });
-
 
 Template.user.events({
 	'submit form' : function(event){
 		event.preventDefault();
-		console.log("test")
 		ingredientName = document.querySelector('#ingredientInput').value;
 
 		Meteor.call('ing.insert', ingredientName, function(err, result){
@@ -24,7 +23,6 @@ Template.user.events({
 		document.querySelector('#ingredientInput').value = '';
 	},
 	'click .deleteIng' : function(event){
-		console.log('delt')
 		event.preventDefault();
 		var ingId = this._id;
 		Meteor.call('ing.remove', ingId)
@@ -37,17 +35,12 @@ Template.user.events({
         //If we have a result there is already a chatroom, so we can use that one
         if(res)
         {
-            //Tmrobotix2 room "9fAnjsnugJi9Fyc99"
-
-            console.log(res._id)
-            //already room exists 9fAnjsnugJi9Fyc99
-            console.log("room exists")
+            console.log("Room exists.")
             Session.set("roomid", res._id);
-            console.log("user.js " + Session.get('roomid'))
         }
         else{
             //no room exists
-            console.log("newroom")
+            console.log("New room.")
             // //Grab both chatids 
             var chatIds = [this.user._id, Meteor.userId()];
             // console.log(chatIds);
@@ -57,7 +50,6 @@ Template.user.events({
             // //After pushing it to db pick it up
             var res=ChatRooms.findOne({chatIds:{$all:[this.user._id,Meteor.userId()]}});
             Session.set("roomid", res._id);
-            console.log("newroom user.js " + Session.get('roomid'))
         }
     }
 })
