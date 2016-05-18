@@ -6,7 +6,10 @@ Template.ingredients.onCreated(function bodyOnCreated() {
 Template.ingredients.helpers({
 	isCreatedby() {
     	return this.createdBy === Meteor.userId();
-  	}
+  	},
+    currentUser: function() {
+        return Meteor.userId();
+    }
 });
 
 Template.user.events({
